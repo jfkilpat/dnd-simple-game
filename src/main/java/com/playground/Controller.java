@@ -41,6 +41,7 @@ public class Controller {
         System.out.println( "Hello World!");
 
         Character character = new Character(
+                "Magicus Phillip",
                 2,
                 new Elf(SubRaceType.WOOD_ELF),
                 new Monk(2),
@@ -78,6 +79,7 @@ public class Controller {
     ) {
         currentGameBoard.getPlayers().add(
                 new Character(
+                        request.getName(),
                         request.getLevel(),
                         Race.determineRace(request.getPlayerRace(), request.getPlayerSubRace()),
                         CharClass.determineClass(request.getPlayerClass(), request.getLevel()),
@@ -99,18 +101,18 @@ public class Controller {
     }
 
     public String createEnvironmentGson() {
-        return gson.toJson(currentGameBoard);
+        return this.gson.toJson(currentGameBoard);
     }
 
     public void setUpEnvironmentFromGson(String env) {
         try {
-            currentGameBoard = gson.fromJson(env, GameBoard.class);
+            this.currentGameBoard = this.gson.fromJson(env, GameBoard.class);
         } catch (JsonSyntaxException e) {
             log.error("Corrupted environment", e);
         }
     }
 
-    public void createGameBoardFromFile() {
+    public void createGameBoardFromFile(String envFileName) {
         try {
             log.info("Creating GameBoard...");
             BufferedReader reader = new BufferedReader(

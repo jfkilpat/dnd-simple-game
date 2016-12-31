@@ -13,6 +13,7 @@ import java.util.Map;
 @Data
 @Slf4j
 public class Character implements Serializable {
+    private String name;
     private Integer level;
     private Race race;
     private CharClass charclass;
@@ -32,11 +33,13 @@ public class Character implements Serializable {
 
 
     public Character (
+            String name,
             Integer level,
             Race race,
             CharClass charclass,
             AbilityScores abilityScores
     ) {
+        this.name = name;
         this.level = level;
         this.race = race;
         this.charclass = charclass;

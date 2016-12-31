@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatePlayerRequest {
+    private String name;
     private Integer level;
     private RaceType playerRace;
     private SubRaceType playerSubRace;
