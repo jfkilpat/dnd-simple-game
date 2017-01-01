@@ -1,4 +1,4 @@
-package com.playground.monster;
+package com.playground.monsterindex;
 
 import java.util.ArrayList;
 import java.util.List;

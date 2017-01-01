@@ -1,4 +1,4 @@
-package com.playground.monster;
+package com.playground.monsterindex;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MonsterIndexLendAction {
+public class MonsterIndexAction {
 
     @SerializedName("name")
     @Expose
@@ -18,4 +18,10 @@ public class MonsterIndexLendAction {
     @SerializedName("attack_bonus")
     @Expose
     public Integer attackBonus;
+    @SerializedName("damage_dice")
+    @Expose
+    public String damageDice;
+    @SerializedName("damage_bonus")
+    @Expose
+    public Integer damageBonus;
 }

@@ -97,7 +97,7 @@ public class Controller {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/monster/create")
+    @RequestMapping(method = RequestMethod.GET, value = "/monsterindex/create")
     public GameBoard addMonster(
             @RequestParam String monsterType,
             @RequestParam String name

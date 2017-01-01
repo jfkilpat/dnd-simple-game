@@ -3,10 +3,10 @@ package com.playground.creature;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.playground.character.AbilityScores;
-import com.playground.monster.MonsterIndex;
-import com.playground.monster.MonsterIndexAction;
-import com.playground.monster.MonsterIndexLendAction;
-import com.playground.monster.MonsterIndexSpcAction;
+import com.playground.monsterindex.MonsterIndex;
+import com.playground.monsterindex.MonsterIndexAction;
+import com.playground.monsterindex.MonsterIndexLendAction;
+import com.playground.monsterindex.MonsterIndexSpcAction;
 import com.playground.util.StringResources;
 
 import java.lang.reflect.Type;
