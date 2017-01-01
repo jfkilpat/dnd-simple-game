@@ -127,7 +127,7 @@ public class Character implements Serializable {
         } else if(Integer.valueOf(20).equals(value) || Integer.valueOf(21).equals(value)) {
             return 5;
         } else {
-            throw new RuntimeException("No modifier found for supplied value: "+value );
+            return 6;
         }
     }
 

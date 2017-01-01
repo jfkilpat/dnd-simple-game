@@ -1,8 +1,8 @@
 package com.playground.dm;
 
 import com.playground.character.AbilityScores;
-import com.playground.monster.Monster;
-import com.playground.monster.MonsterType;
+import com.playground.creature.Creature;
+import com.playground.creature.CreatureType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,15 +14,15 @@ public class DungeonMaster {
 
     private String name;
 
-    private List<Monster> recentlyCreatedMonsters;
+    private List<Creature> recentlyCreatedCreatures;
 
-    public DungeonMaster(String name, List<Monster> recentlyCreatedMonsters) {
+    public DungeonMaster(String name, List<Creature> recentlyCreatedCreatures) {
         this.name = name;
-        this.recentlyCreatedMonsters = recentlyCreatedMonsters;
+        this.recentlyCreatedCreatures = recentlyCreatedCreatures;
     }
 
-    public void createNewMonster(String name, MonsterType type, AbilityScores abilityScores) {
-        recentlyCreatedMonsters.add(Monster.builder()
+    public void createNewMonster(String name, CreatureType type, AbilityScores abilityScores) {
+        recentlyCreatedCreatures.add(Creature.builder()
             .name(name)
             .type(type)
             .abilityScores(abilityScores)

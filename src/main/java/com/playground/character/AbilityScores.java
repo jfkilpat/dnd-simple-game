@@ -30,6 +30,7 @@ public class AbilityScores {
         this.wisdom = wisdom;
         this.constitution = constitution;
         this.charisma = charisma;
+        this.determineModifierValues();
     }
 
 

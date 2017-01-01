@@ -9,8 +9,9 @@ import com.playground.charclass.Monk;
 import com.playground.dm.DungeonMaster;
 import com.playground.env.GameBoard;
 import com.playground.env.GameBoardFactory;
-import com.playground.monster.Monster;
-import com.playground.monster.MonsterType;
+import com.playground.creature.Creature;
+import com.playground.creature.PreMadeCreatureFactory;
+import com.playground.creature.CreatureType;
 import com.playground.race.Elf;
 import com.playground.race.Race;
 import com.playground.race.SubRaceType;
@@ -26,6 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -49,9 +51,9 @@ public class Controller {
         );
 
         currentGameBoard = GameBoard.builder()
-                .dm(new DungeonMaster("Jon", new ArrayList<Monster>()))
+                .dm(new DungeonMaster("Jon", new ArrayList<Creature>()))
                 .players(Collections.singletonList(character))
-                .monsters(new ArrayList<>())
+                .creatures(new ArrayList<>())
                 .build();
 
         String env = createEnvironmentGson();
@@ -60,13 +62,18 @@ public class Controller {
         return currentGameBoard;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/test")
+    public List<Creature> getMonsters() {
+        return PreMadeCreatureFactory.get();
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/dm/create")
     public GameBoard createDM (
             @RequestParam String name
     ) {
         currentGameBoard.setDm(DungeonMaster.builder()
                 .name(name)
-                .recentlyCreatedMonsters(new ArrayList<>())
+                .recentlyCreatedCreatures(new ArrayList<>())
                 .build()
         );
         return currentGameBoard;
@@ -96,7 +103,7 @@ public class Controller {
             @RequestParam String name
     ) {
         DungeonMaster dungeonMaster = currentGameBoard.getDm();
-        dungeonMaster.createNewMonster(name, MonsterType.valueOf(monsterType), new AbilityScores(8,8,8,8,8,8));
+        dungeonMaster.createNewMonster(name, CreatureType.valueOf(monsterType), new AbilityScores(8,8,8,8,8,8));
         return currentGameBoard;
     }
 
