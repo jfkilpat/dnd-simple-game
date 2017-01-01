@@ -13,6 +13,8 @@ import java.io.IOException;
 @Slf4j
 public class GameboardSaveUtil {
 
+    private static final String gameSaveName = "GameBoardJSON.json";
+
     private static Gson gson = new Gson();
 
     public static String createJsonFromGameBoard(GameBoard gameBoard) {
@@ -44,7 +46,7 @@ public class GameboardSaveUtil {
     public static void exportGameBoardToFile(GameBoard gameBoard) {
         try {
             log.info("Reading Gameboard File...");
-            FileWriter fileWriter = new FileWriter("EnvironmentGSON.json");
+            FileWriter fileWriter = new FileWriter(gameSaveName);
             fileWriter.write(createJsonFromGameBoard(gameBoard));
             fileWriter.close();
         } catch (IOException e) {
