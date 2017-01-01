@@ -15,6 +15,7 @@ import com.playground.creature.CreatureType;
 import com.playground.race.Elf;
 import com.playground.race.Race;
 import com.playground.race.SubRaceType;
+import com.playground.util.GameboardSaveUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,8 +57,8 @@ public class Controller {
                 .creatures(new ArrayList<>())
                 .build();
 
-        String env = createEnvironmentGson();
-        setUpEnvironmentFromGson(env);
+        GameboardSaveUtil.exportGameBoardToFile(currentGameBoard);
+        GameboardSaveUtil.importGameBoardFromFile("GameBoardJSON.json");
 
         return currentGameBoard;
     }
@@ -97,48 +98,17 @@ public class Controller {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/monsterindex/create")
+    @RequestMapping(method = RequestMethod.GET, value = "/creature/create")
     public GameBoard addMonster(
             @RequestParam String monsterType,
             @RequestParam String name
     ) {
         DungeonMaster dungeonMaster = currentGameBoard.getDm();
-        dungeonMaster.createNewMonster(name, CreatureType.valueOf(monsterType), new AbilityScores(8,8,8,8,8,8));
+        dungeonMaster.createNewMonster(name,
+                CreatureType.valueOf(monsterType),
+                new AbilityScores(8,8,8,8,8,8));
         return currentGameBoard;
     }
 
-    public String createEnvironmentGson() {
-        return this.gson.toJson(currentGameBoard);
-    }
 
-    public void setUpEnvironmentFromGson(String env) {
-        try {
-            this.currentGameBoard = this.gson.fromJson(env, GameBoard.class);
-        } catch (JsonSyntaxException e) {
-            log.error("Corrupted environment", e);
-        }
-    }
-
-    public void createGameBoardFromFile(String envFileName) {
-        try {
-            log.info("Creating GameBoard...");
-            BufferedReader reader = new BufferedReader(
-                    new FileReader("EnvironmentGSON.json")
-            );
-            setUpEnvironmentFromGson(reader.readLine());
-        } catch (IOException e) {
-            log.error("Error Creating GameBoard From file...", e);
-        }
-    }
-
-    public void writeGameBoardToFile() {
-        try {
-            log.info("Reading Gameboard File...");
-            FileWriter fileWriter = new FileWriter("EnvironmentGSON.json");
-            fileWriter.write(createEnvironmentGson());
-            fileWriter.close();
-        } catch (IOException e) {
-            log.error("Error Writing GameBoard to file...", e);
-        }
-    }
 }
