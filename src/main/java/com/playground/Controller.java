@@ -1,7 +1,5 @@
 package com.playground;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.playground.character.AbilityScores;
 import com.playground.character.Character;
 import com.playground.charclass.CharClass;
@@ -22,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,9 +29,7 @@ import java.util.List;
 @RequestMapping(path = "/game")
 public class Controller {
 
-    private GameBoard currentGameBoard = GameBoardFactory.get();
-
-    private Gson gson = new Gson();
+    private GameBoard sessionGameBoard = GameBoardFactory.get();
 
     @RequestMapping(method = RequestMethod.GET)
     public GameBoard createGameBoard() {
@@ -51,16 +43,16 @@ public class Controller {
                 new AbilityScores(14,15,13,12,10,8)
         );
 
-        currentGameBoard = GameBoard.builder()
+        sessionGameBoard = GameBoard.builder()
                 .dm(new DungeonMaster("Jon", new ArrayList<Creature>()))
                 .players(Collections.singletonList(character))
                 .creatures(new ArrayList<>())
                 .build();
 
-        GameboardSaveUtil.exportGameBoardToFile(currentGameBoard);
+        GameboardSaveUtil.exportGameBoardToFile(sessionGameBoard);
         GameboardSaveUtil.importGameBoardFromFile("GameBoardJSON.json");
 
-        return currentGameBoard;
+        return sessionGameBoard;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/test")
@@ -72,12 +64,12 @@ public class Controller {
     public GameBoard createDM (
             @RequestParam String name
     ) {
-        currentGameBoard.setDm(DungeonMaster.builder()
+        sessionGameBoard.setDm(DungeonMaster.builder()
                 .name(name)
                 .recentlyCreatedCreatures(new ArrayList<>())
                 .build()
         );
-        return currentGameBoard;
+        return sessionGameBoard;
     }
 
 
@@ -85,16 +77,16 @@ public class Controller {
     public GameBoard createPlayer(
             CreatePlayerRequest request
     ) {
-        currentGameBoard.getPlayers().add(
+        sessionGameBoard.getPlayers().add(
                 new Character(
                         request.getName(),
                         request.getLevel(),
-                        Race.determineRace(request.getPlayerRace(), request.getPlayerSubRace()),
+                        Race.determineRace(request.getPlayerRace(), request.getPlayerSubRace(), request.getFirstAbilityIncrease(), request.getSecondAbilityIncrease()),
                         CharClass.determineClass(request.getPlayerClass(), request.getLevel()),
                         request.getAbilityScores()
                 )
         );
-        return currentGameBoard;
+        return sessionGameBoard;
     }
 
 
@@ -103,11 +95,11 @@ public class Controller {
             @RequestParam String monsterType,
             @RequestParam String name
     ) {
-        DungeonMaster dungeonMaster = currentGameBoard.getDm();
+        DungeonMaster dungeonMaster = sessionGameBoard.getDm();
         dungeonMaster.createNewMonster(name,
                 CreatureType.valueOf(monsterType),
                 new AbilityScores(8,8,8,8,8,8));
-        return currentGameBoard;
+        return sessionGameBoard;
     }
 
 

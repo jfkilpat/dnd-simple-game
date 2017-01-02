@@ -26,7 +26,7 @@ public class Race {
         DEX
     }
 
-    public static Race determineRace(RaceType race, SubRaceType subrace) {
+    public static Race determineRace(RaceType race, SubRaceType subrace, Ability firstChoice, Ability secondChoice) {
         Race type = null;
         switch (race) {
             case ELF:
@@ -43,6 +43,7 @@ public class Race {
                 }
                 break;
             case DRAGONBORN:
+                type = new Dragonborn();
                 break;
             case DWARF:
                 switch (subrace) {
@@ -57,25 +58,34 @@ public class Race {
             case GNOME:
                 switch (subrace) {
                     case FOREST_GNOME:
+                        type = new Gnome(SubRaceType.FOREST_GNOME);
                         break;
                     case ROCK_GNOME:
+                        type = new Gnome(SubRaceType.ROCK_GNOME);
+                        break;
                 }
                 break;
             case HALFELF:
+                type = new HalfElf(firstChoice, secondChoice);
                 break;
             case HALFORC:
+                type = new HalfOrc();
                 break;
             case HALFLING:
                 switch (subrace) {
                     case LIGHTFOOT_HALFLING:
+                        type = new Halfling(SubRaceType.LIGHTFOOT_HALFLING);
                         break;
                     case STOUT_HALFLING:
+                        type = new Halfling(SubRaceType.STOUT_HALFLING);
                         break;
                 }
                 break;
             case TIEFLING:
+                type = new Tiefling();
                 break;
             case HUMAN:
+                type = new Human();
                 break;
         }
         return type;

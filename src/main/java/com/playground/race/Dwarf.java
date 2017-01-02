@@ -17,6 +17,8 @@ public class Dwarf extends Race {
             case MOUNTAIN_DWARF:
                 racialAbilityBonues.put(Ability.STR, 2);
                 break;
+            case NONE:
+                break;
         }
         super.setRacialStatBonuses(racialAbilityBonues);
         super.setType(RaceType.DWARF);

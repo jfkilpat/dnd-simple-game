@@ -2,6 +2,7 @@ package com.playground;
 
 import com.playground.character.AbilityScores;
 import com.playground.charclass.ClassTypes;
+import com.playground.race.Race;
 import com.playground.race.RaceType;
 import com.playground.race.SubRaceType;
 import lombok.AllArgsConstructor;
@@ -20,4 +21,6 @@ public class CreatePlayerRequest {
     private SubRaceType playerSubRace;
     private ClassTypes playerClass;
     private AbilityScores abilityScores;
+    private Race.Ability firstAbilityIncrease;
+    private Race.Ability secondAbilityIncrease;
 }
