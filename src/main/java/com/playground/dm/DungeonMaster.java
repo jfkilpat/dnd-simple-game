@@ -6,11 +6,12 @@ import com.playground.creature.CreatureType;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Builder
-public class DungeonMaster {
+public class DungeonMaster implements Serializable {
 
     private String name;
 
@@ -21,10 +22,20 @@ public class DungeonMaster {
         this.recentlyCreatedCreatures = recentlyCreatedCreatures;
     }
 
-    public void createNewMonster(String name, CreatureType type, AbilityScores abilityScores) {
+    public void createNewMonster(
+            String name,
+            CreatureType type,
+            Integer hitPoints,
+            Integer armorClass,
+            String size,
+            AbilityScores abilityScores
+    ) {
         recentlyCreatedCreatures.add(Creature.builder()
             .name(name)
             .type(type)
+            .hitPoints(hitPoints)
+            .armorClass(armorClass)
+            .size(size)
             .abilityScores(abilityScores)
             .build());
     }

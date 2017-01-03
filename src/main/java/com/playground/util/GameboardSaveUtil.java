@@ -49,6 +49,7 @@ public class GameboardSaveUtil {
             FileWriter fileWriter = new FileWriter(gameSaveName);
             fileWriter.write(createJsonFromGameBoard(gameBoard));
             fileWriter.close();
+            log.info("Finished Writing Gameboard to JSON...");
         } catch (IOException e) {
             log.error("Error Writing GameBoard to file...", e);
         }

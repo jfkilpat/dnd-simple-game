@@ -1,7 +1,5 @@
 package com.playground.race;
 
-import sun.plugin.net.protocol.jar.CachedJarURLConnection;
-
 import java.util.HashMap;
 import java.util.Map;
 

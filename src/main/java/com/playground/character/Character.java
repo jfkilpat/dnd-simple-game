@@ -31,7 +31,6 @@ public class Character implements Serializable {
 
     //Background info?
 
-
     public Character (
             String name,
             Integer level,
@@ -102,7 +101,6 @@ public class Character implements Serializable {
         }
     }
 
-
     public static Integer determineAbilityModifier(Integer value) {
         if(Integer.valueOf(1).equals(value)){
             return -5;
@@ -131,7 +129,6 @@ public class Character implements Serializable {
         }
     }
 
-
     private void determineArmorClass() {
         if(this.charclass.getClass().equals(Monk.class)){
             this.armorClass = 10 + this.abilityScores.getDexModifier() + this.abilityScores.getWisModifier();
@@ -151,10 +148,5 @@ public class Character implements Serializable {
                 this.armorClass = 11 + this.abilityScores.getDexModifier();
             }
         }
-    }
-
-    public void levelUp() {
-        this.level = this.level + 1;
-
     }
 }

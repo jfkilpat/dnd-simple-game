@@ -1,4 +1,4 @@
-package com.playground;
+package com.playground.character;
 
 import com.playground.character.AbilityScores;
 import com.playground.charclass.ClassTypes;

@@ -25,7 +25,7 @@ public class PreMadeCreatureFactory {
             String json = StringResources.monsterIndexJson;
             Type collectionType = new TypeToken<Collection<MonsterIndex>>(){}.getType();
             Collection<MonsterIndex> monsterIndexList = gson.fromJson(json, collectionType);
-            creatures = monsterIndexList.stream().map(PreMadeCreatureFactory::createMonster).collect(Collectors.toList());
+            creatures = monsterIndexList.parallelStream().map(PreMadeCreatureFactory::createMonster).collect(Collectors.toList());
         }
         return creatures;
     }

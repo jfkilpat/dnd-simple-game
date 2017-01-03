@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GameBoard {
-    DungeonMaster dm;
-    List<Character> players;
-    List<Creature> creatures;
-
+    public DungeonMaster dm;
+    public List<Character> players;
+    public List<Creature> creatures;
+    public Date timestamp;
 }

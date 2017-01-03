@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.util.Map;
 
 @Data
@@ -22,19 +23,25 @@ public class CharClass {
         CharClass classType = null;
         switch (playerClass) {
             case BARD:
+                classType = new Bard(level);
                 break;
             case CLERIC:
+                classType = new Cleric();
                 break;
             case DRUID:
+                classType = new Druid();
                 break;
             case FIGHTER:
+                classType = new Fighter();
                 break;
             case MONK:
                 classType = new Monk(level);
                 break;
             case PALADIN:
+                classType = new Paladin();
                 break;
-            case RNGER:
+            case RANGER:
+                classType = new Ranger();
                 break;
             case ROGUE:
                 break;

@@ -2,14 +2,15 @@ package com.playground;
 
 import com.playground.character.AbilityScores;
 import com.playground.character.Character;
+import com.playground.character.CreatePlayerRequest;
 import com.playground.charclass.CharClass;
 import com.playground.charclass.Monk;
+import com.playground.creature.CreatureCreateRequest;
 import com.playground.dm.DungeonMaster;
 import com.playground.env.GameBoard;
 import com.playground.env.GameBoardFactory;
 import com.playground.creature.Creature;
 import com.playground.creature.PreMadeCreatureFactory;
-import com.playground.creature.CreatureType;
 import com.playground.race.Elf;
 import com.playground.race.Race;
 import com.playground.race.SubRaceType;
@@ -49,9 +50,6 @@ public class Controller {
                 .creatures(new ArrayList<>())
                 .build();
 
-        GameboardSaveUtil.exportGameBoardToFile(sessionGameBoard);
-        GameboardSaveUtil.importGameBoardFromFile("GameBoardJSON.json");
-
         return sessionGameBoard;
     }
 
@@ -90,16 +88,27 @@ public class Controller {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/creature/create")
+    @RequestMapping(method = RequestMethod.POST, value = "/creature/create")
     public GameBoard addMonster(
-            @RequestParam String monsterType,
-            @RequestParam String name
+            CreatureCreateRequest request
+
     ) {
         DungeonMaster dungeonMaster = sessionGameBoard.getDm();
-        dungeonMaster.createNewMonster(name,
-                CreatureType.valueOf(monsterType),
-                new AbilityScores(8,8,8,8,8,8));
+        dungeonMaster.createNewMonster(
+                request.getName(),
+                request.getType(),
+                request.getHitPoints(),
+                request.getArmorClass(),
+                request.getSize(),
+                new AbilityScores(8,8,8,8,8,8)
+        );
         return sessionGameBoard;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/save")
+    public void saveGameBoard() {
+        GameboardSaveUtil.exportGameBoardToFile(sessionGameBoard);
+        GameboardSaveUtil.importGameBoardFromFile("GameBoardJSON.json");
     }
 
 
