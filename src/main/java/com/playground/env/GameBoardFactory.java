@@ -10,4 +10,8 @@ public class GameBoardFactory {
         if(instance != null) return instance;
         return instance = GameBoard.builder().timestamp(new Date(System.currentTimeMillis())).build();
     }
+
+    public static void set(GameBoard gameBoard) {
+        instance = gameBoard;
+    }
 }
