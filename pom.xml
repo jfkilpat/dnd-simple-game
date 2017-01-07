@@ -31,6 +31,15 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-actuator</artifactId>
       </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-mongodb</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-websocket</artifactId>
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -69,15 +78,6 @@
       </dependency>
 
       <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-websocket</artifactId>
-      </dependency>
-
-      <dependency>
-          <groupId>org.webjars</groupId>
-          <artifactId>webjars-locator</artifactId>
-      </dependency>
-      <dependency>
           <groupId>org.webjars</groupId>
           <artifactId>sockjs-client</artifactId>
           <version>1.0.2</version>
@@ -97,6 +97,17 @@
           <artifactId>jquery</artifactId>
           <version>3.1.0</version>
       </dependency>
+      <dependency>
+          <groupId>org.webjars</groupId>
+          <artifactId>angularjs</artifactId>
+          <version>1.4.3</version>
+      </dependency>
+      <dependency>
+          <groupId>org.webjars</groupId>
+          <artifactId>webjars-locator</artifactId>
+      </dependency>
+
+
 
   </dependencies>
 

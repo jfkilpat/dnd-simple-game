@@ -6,12 +6,11 @@ import com.playground.creature.CreatureType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Builder
-public class DungeonMaster implements Serializable {
+public class DungeonMaster{
 
     private String name;
 

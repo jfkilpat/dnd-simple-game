@@ -3,8 +3,10 @@ package com.playground.character;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AbilityScores {
+public class AbilityScores implements Serializable {
     private Integer strength;
     private Integer strModifier;
 

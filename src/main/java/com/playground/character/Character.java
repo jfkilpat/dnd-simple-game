@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Data
 @Slf4j
-public class Character implements Serializable {
+public class Character {
     private String name;
     private Integer level;
     private Race race;

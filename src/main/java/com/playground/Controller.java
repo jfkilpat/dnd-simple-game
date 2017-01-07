@@ -8,18 +8,18 @@ import com.playground.charclass.Monk;
 import com.playground.creature.CreatureCreateRequest;
 import com.playground.dm.DungeonMaster;
 import com.playground.env.GameBoard;
+import com.playground.env.GameBoardDatabase;
 import com.playground.env.GameBoardFactory;
 import com.playground.creature.Creature;
 import com.playground.creature.PreMadeCreatureFactory;
+import com.playground.env.GameBoardRepository;
 import com.playground.race.Elf;
 import com.playground.race.Race;
 import com.playground.race.SubRaceType;
 import com.playground.util.GameboardSaveUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +32,13 @@ import java.util.List;
 public class Controller {
 
     private GameBoard sessionGameBoard = GameBoardFactory.get();
+
+    private GameBoardRepository gameBoardRepository;
+
+    @Autowired
+    public Controller(GameBoardRepository gameBoardRepository) {
+        this.gameBoardRepository = gameBoardRepository;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public GameBoard createGameBoard() {
@@ -52,6 +59,7 @@ public class Controller {
                 .timestamp(new Date(System.currentTimeMillis()))
                 .build();
         GameBoardFactory.set(sessionGameBoard);
+
         return sessionGameBoard;
     }
 
@@ -113,5 +121,22 @@ public class Controller {
         GameboardSaveUtil.importGameBoardFromFile("GameBoardJSON.json");
     }
 
+
+    @GetMapping(value = "/mongo/save")
+    public GameBoard saveGameBoardToMongoDb() {
+        gameBoardRepository.deleteAll();
+
+        gameBoardRepository.save(GameBoardDatabase.builder()
+                .gameBoardJSON(GameboardSaveUtil.createJsonFromGameBoard(sessionGameBoard))
+                .build()
+        );
+
+        List<GameBoardDatabase> gameBoards = gameBoardRepository.findAll();
+        for (GameBoardDatabase gameBoard : gameBoards) {
+            log.info(gameBoard.toString());
+            GameBoardFactory.set(GameboardSaveUtil.setupGameBoardFromJson(gameBoard.getGameBoardJSON()));
+        }
+        return sessionGameBoard;
+    }
 
 }
