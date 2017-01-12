@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -56,7 +55,6 @@ public class Controller {
                 .dm(new DungeonMaster("Jon", new ArrayList<Creature>()))
                 .players(Collections.singletonList(character))
                 .creatures(new ArrayList<>())
-                .timestamp(new Date(System.currentTimeMillis()))
                 .build();
         GameBoardFactory.set(sessionGameBoard);
 

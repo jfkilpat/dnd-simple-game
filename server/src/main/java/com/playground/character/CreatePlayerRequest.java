@@ -1,6 +1,5 @@
 package com.playground.character;
 
-import com.playground.character.AbilityScores;
 import com.playground.charclass.ClassTypes;
 import com.playground.race.Race;
 import com.playground.race.RaceType;
