@@ -1,9 +1,9 @@
 package com.playground.character;
 
-import com.playground.charclass.ClassTypes;
-import com.playground.race.Race;
-import com.playground.race.RaceType;
-import com.playground.race.SubRaceType;
+import com.playground.character.charclass.ClassTypes;
+import com.playground.character.race.Race;
+import com.playground.character.race.RaceType;
+import com.playground.character.race.SubRaceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

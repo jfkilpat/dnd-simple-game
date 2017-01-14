@@ -1,8 +1,8 @@
 package com.playground.character;
 
-import com.playground.charclass.CharClass;
-import com.playground.charclass.Monk;
-import com.playground.race.Race;
+import com.playground.character.charclass.CharClass;
+import com.playground.character.charclass.Monk;
+import com.playground.character.race.Race;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

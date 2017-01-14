@@ -2,7 +2,7 @@ package com.playground.util;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.playground.env.GameBoard;
+import com.playground.gameboard.GameBoard;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

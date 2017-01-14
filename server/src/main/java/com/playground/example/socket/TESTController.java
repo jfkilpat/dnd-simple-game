@@ -1,7 +1,7 @@
 package com.playground.example.socket;
 
-import com.playground.env.GameBoard;
-import com.playground.env.GameBoardFactory;
+import com.playground.gameboard.GameBoard;
+import com.playground.gameboard.GameBoardFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
