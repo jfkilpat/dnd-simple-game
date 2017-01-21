@@ -1,25 +1,35 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {
+  Component
+} from '@angular/core';
+import {
+  NavController,
+  NavParams
+} from 'ionic-angular';
 
-/*
-  Generated class for the Characters page.
+import {
+  AjaxService
+} from '../../providers/ajax-service';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-characters',
   templateUrl: 'characters.html'
 })
 export class CharactersPage {
 
-    characters = [
-      'Ardent',
-      'Grum',
-      'Magicus Michael',
-      'Magicus Philip',
-      'Steve'
-    ];
+  characters = [];
+
+  constructor(private ajaxService: AjaxService) {
+    this.ajaxService = ajaxService;
+  }
+
+  ngOnInit() {
+    this.ajaxService.findCharacters().subscribe(
+      data => {
+        console.log(data.results);
+        this.characters = [data.results[0].name.title, data.results[0].name.first, data.results[0].name.last];
+      }
+    );
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CharactersPage');

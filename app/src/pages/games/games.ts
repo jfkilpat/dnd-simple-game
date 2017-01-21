@@ -1,5 +1,14 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {
+  Component
+} from '@angular/core';
+import {
+  NavController,
+  NavParams
+} from 'ionic-angular';
+
+import {
+  AjaxService
+} from '../../providers/ajax-service';
 
 /*
   Generated class for the Games page.
@@ -13,18 +22,19 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class GamesPage {
 
-    games = [
-      'Legends of Avalon',
-      'Ordinal Waypath',
-      'Fungeons and Flagons?',
-      'Zac is a nerd lmao',
-      'Steven Unicorn',
-      'Steven Uniform?',
-      'Oh, Steven Universe',
-      'I am delirious',
-      'From a lack',
-      'of sleep'
-    ];
+  games = [];
+  constructor(private ajaxService: AjaxService) {
+    this.ajaxService = ajaxService;
+  }
+
+  ngOnInit() {
+    this.ajaxService.findGames().subscribe(
+      data => {
+        console.log(data.results);
+        this.games = [data.results[0].cell, data.results[0].dob, data.results[0].email];
+      }
+    );
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GamesPage');
