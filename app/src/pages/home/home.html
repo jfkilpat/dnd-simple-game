@@ -1,11 +1,34 @@
 <ion-header>
   <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
     <ion-title>
       Landing Page
     </ion-title>
   </ion-navbar>
 </ion-header>
-
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-list>
+        <button ion-item [navPush]="charactersPage">
+          Characters
+        </button>
+        <button ion-item [navPush]="gamesPage">
+          Games
+        </button>
+        <button ion-item >
+          Active Game
+        </button>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+      <button ion-item >
+        Log Out
+      </button>
+  </ion-footer>
+</ion-menu>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
 <ion-content padding>
   <div class='centerAlignResponsive'>
       <p>Login Page will lead to here?</p>
